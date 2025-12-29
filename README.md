@@ -12,6 +12,8 @@ A PyTorch-based Convolutional Neural Network (CNN) for classifying animal images
 - ragno (spider)
 - scoiattolo (squirrel)
 
+
+##Make sure you have the proper 'archive' folder from: 'https://www.kaggle.com/datasets/alessiocorrado99/animals10?select=raw-img' in the same wd as the scripts.
 ## Installation
 
 1. Install required dependencies:
