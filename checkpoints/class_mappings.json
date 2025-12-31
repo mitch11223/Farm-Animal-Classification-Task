@@ -1,0 +1,26 @@
+{
+  "class_to_idx": {
+    "cane": 0,
+    "cavallo": 1,
+    "elefante": 2,
+    "farfalla": 3,
+    "gallina": 4,
+    "gatto": 5,
+    "mucca": 6,
+    "pecora": 7,
+    "ragno": 8,
+    "scoiattolo": 9
+  },
+  "idx_to_class": {
+    "0": "cane",
+    "1": "cavallo",
+    "2": "elefante",
+    "3": "farfalla",
+    "4": "gallina",
+    "5": "gatto",
+    "6": "mucca",
+    "7": "pecora",
+    "8": "ragno",
+    "9": "scoiattolo"
+  }
+}

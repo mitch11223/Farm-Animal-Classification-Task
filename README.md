@@ -12,8 +12,6 @@ A PyTorch-based Convolutional Neural Network (CNN) for classifying animal images
 - ragno (spider)
 - scoiattolo (squirrel)
 
-
-##Make sure you have the proper 'archive' folder from: 'https://www.kaggle.com/datasets/alessiocorrado99/animals10?select=raw-img' in the same wd as the scripts.
 ## Installation
 
 1. Install required dependencies:
@@ -37,6 +35,7 @@ python train.py --data_dir archive/raw-img --epochs 50 --batch_size 32 --lr 0.00
 - `--epochs`: Number of training epochs (default: 50)
 - `--lr`: Learning rate (default: 0.001)
 - `--save_dir`: Directory to save model checkpoints (default: `./checkpoints`)
+- `--log_dir`: Directory to save training logs and plots (default: `./logs`)
 - `--device`: Device to use (`cuda` or `cpu`, default: `cuda`)
 
 The training script will:
@@ -44,6 +43,12 @@ The training script will:
 - Apply data augmentation to training images
 - Save the best model based on validation accuracy
 - Save class mappings to `checkpoints/class_mappings.json`
+- **Generate training curves and save them to `logs/` directory:**
+  - `training_curves.png/pdf`: Combined loss and accuracy plots
+  - `loss_curve.png/pdf`: Loss curves (training, validation, test)
+  - `accuracy_curve.png/pdf`: Accuracy curves (training, validation, test)
+  - `training_history.json`: Complete training history with all metrics
+- Evaluate on test set and include results in plots
 
 ### Testing/Classifying an Image
 
@@ -89,11 +94,27 @@ The model uses:
    - Softmax is applied to convert logits to probabilities
    - The class with the highest probability is selected as the prediction
 
+## Training Artifacts
+
+After training, the `logs/` directory will contain:
+
+- **`training_curves.png/pdf`**: Combined visualization of loss and accuracy curves
+- **`loss_curve.png/pdf`**: High-resolution loss curves (training, validation, test)
+- **`accuracy_curve.png/pdf`**: High-resolution accuracy curves (training, validation, test)
+- **`training_history.json`**: Complete training history including:
+  - Loss and accuracy for each epoch
+  - Best validation accuracy
+  - Test set results
+  - Training hyperparameters
+  - Timestamp
+
+These artifacts are suitable for inclusion in research papers and presentations.
+
 ## Files
 
 - `model.py`: CNN architecture definition
 - `data_loader.py`: Dataset and data loading utilities
-- `train.py`: Training script
+- `train.py`: Training script with logging and plotting
 - `test_image.py`: Inference/classification script
 - `requirements.txt`: Python dependencies
 - `archive/translate.py`: Class name translations (Italian ↔ English)

@@ -1,7 +1,14 @@
+# Core PyTorch dependencies
 torch>=2.0.0
 torchvision>=0.15.0
+
+# Image processing
 Pillow>=9.0.0
+
+# Numerical computing and plotting
 numpy>=1.21.0
 matplotlib>=3.5.0
+
+# Progress bars
 tqdm>=4.64.0
 

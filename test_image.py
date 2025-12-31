@@ -7,7 +7,10 @@ import json
 import os
 from model import AnimalClassifierCNN
 
+#the prupsoe of this script is to classify an image into one of the 10 classes
 
+
+#This function loads the trained model from the checkpoint file
 def load_model(model_path, num_classes, device='cuda'):
     """
     Load a trained model from checkpoint.
@@ -26,7 +29,7 @@ def load_model(model_path, num_classes, device='cuda'):
     model.eval()
     return model
 
-
+#This function preprocesses the image for inference
 def preprocess_image(image_path, device='cuda'):
     """
     Preprocess an image for inference.
@@ -53,6 +56,7 @@ def preprocess_image(image_path, device='cuda'):
     return image_tensor
 
 
+#This function classifies the image and returns the probabilities for all classes
 def classify_image(model, image_tensor, idx_to_class, top_k=5):
     """
     Classify an image and return probabilities for all classes.
@@ -126,16 +130,21 @@ def main():
                        help='Path to trained model checkpoint')
     parser.add_argument('--mappings', type=str, default='./checkpoints/class_mappings.json',
                        help='Path to class mappings JSON file')
-    parser.add_argument('--device', type=str, default='cuda',
+    parser.add_argument('--device', type=str, default='cpu',
                        choices=['cuda', 'cpu'],
-                       help='Device to use for inference')
+                       help='Device to use for inference (default: cpu)')
     parser.add_argument('--top_k', type=int, default=5,
                        help='Number of top predictions to display')
     
     args = parser.parse_args()
     
-    # Set device
-    device = torch.device(args.device if torch.cuda.is_available() and args.device == 'cuda' else 'cpu')
+    # Set device - use CUDA only if explicitly requested and available
+    if args.device == 'cuda' and torch.cuda.is_available():
+        device = torch.device('cuda')
+    else:
+        device = torch.device('cpu')
+        if args.device == 'cuda':
+            print("Warning: CUDA requested but not available. Using CPU instead.")
     print(f"Using device: {device}")
     
     # Load class mappings
